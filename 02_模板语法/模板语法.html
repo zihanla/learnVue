@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<!-- 
+    插值语法：作用于标签体
+    指令语法: 作用于标签 支持js表达式
+ -->
+
+<body>
+    <!-- 创建模板 -->
+    <div id="app">
+        <h1>插值语法</h1>
+        Hell0,{{name}}
+        <hr>
+        <h1>指令语法</h1>
+        <a v-bind:href="url" target="_blank">个人主页</a><br>
+        <!-- toUpperCase() js转大写函数 -->
+        <a :href="blog.url" :x="blog.pinyin.toUpperCase()" target="_blank">{{blog.name}}</a>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 以阻止 vue 在启动时生成生产提示
+
+        // 创建Vue实例(创建Vue构造函数)
+        new Vue({
+            el: "#app",
+            data: {
+                name: "子涵",
+                url: "https://hxcpl.cn",
+                blog: {
+                    name: "涵有闲",
+                    url: "https://blog.hxcpl.cn",
+                    pinyin: "hyx"
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
