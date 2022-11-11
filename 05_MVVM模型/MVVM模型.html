@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVVM模型</title>
+</head>
+
+<!-- 
+    1.M: 模型(Model): 对应data中的数据
+    2.V: 视图(View): 模板
+    3.VM: 视图模型(ViewModel): Vue实例对象
+ -->
+
+<body>
+    <!-- 创建模板容器 -->
+    <div id="app">
+        <h3>一言:</h3>
+        {{msg}}
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false // 以阻止 vue 在启动时生成生产提示
+        // 创建Vue实例
+        const vm = new Vue({
+            data() {
+                return {
+                    msg: "但行好事，莫问前程",
+                }
+            },
+        })
+        vm.$mount("#app")
+    </script>
+</body>
+
+</html>

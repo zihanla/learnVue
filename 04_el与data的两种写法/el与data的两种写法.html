@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>el与data的两种写法</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 创建模板容器 -->
+    <div id="app">
+        hello,{{name}}
+    </div>
+    <script>
+        Vue.config.productionTip = false // 以阻止 vue 在启动时生成生产提示
+        // 创建Vue实例(使用new 生成Vue构造函数)
+        // el的两种写法
+
+        // const x = new Vue({
+        //     // el: "#app",
+        //     data: {
+        //         name: "Han",
+        //     }
+        // })
+        // console.log(x) //  Prototype Vue原型链 
+        // x.$mount("#app") // 通过原型上的mount方法，把模板挂载到Vue原型上
+
+        // data的两种写法
+        // 使用组件化的时候必须使用写法二(函数式)
+        const x = new Vue({
+            el: "#app",
+            // 写法一 对象式:
+            // data: {
+            //     name: "Han",
+            // }
+            // 写法二 函数式:
+            // data: function () {
+            //     return {
+            //         name: "Han",
+            //     }
+            // } 
+            // 写法二的简写
+            data() {
+                return {
+                    name: "Han",
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

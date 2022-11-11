@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据绑定</title>
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+    单向数据绑定 数据影响页面
+    双向数据绑定 数据和页面互相影响
+    双向绑定适用于表单(输入类标签)
+ -->
+
+<body>
+    <!-- 创建模板容器 -->
+    <div id="app">
+        <!-- 单向数据绑定: <input type="text" v-bind:value="name"><br>
+        双向数据绑定: <input type="text" v-model:value="name"> -->
+        <!-- 简写 -->
+        单向数据绑定: <input type="text" :value="name"><br>
+        双向数据绑定: <input type="text" v-model="name">
+    </div>
+
+    <script>
+        Vue.config.productionTip = false // 以阻止 vue 在启动时生成生产提示
+        // 创建Vue实例
+        new Vue({
+            el: "#app",
+            data: {
+                name: "涵有闲",
+            },
+        })
+    </script>
+</body>
+
+</html>
