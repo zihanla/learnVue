@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据代理定义</title>
+</head>
+<!-- 数据代理:
+    通过一个对象代理 对另一个对象中属性的操作(读/写)
+    Vue中的数据代理:
+        通过vm对象来处理data对象中属性的操作(读/写)，比原生更加方便
+    原理:
+        通过Object.defineProperty()把data对象中所有的属性都添加到vm上
+        为每一个添加到vm上的属性，都指定一个getter/setter方法
+        在getter/setter内部去操作(读/写) data中对应的属性
+ -->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        {{name}}
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        // 原生js 实现
+        // let data = { name: "子涵" }
+        // let data2 = { x: "我是个对象" }
+        // // 通过Object对象中的定义所有物方法 给obj2添加x属性 
+        // Object.defineProperty(data2, 'name', {
+        //     get() {
+        //         return data.name
+        //     },
+        //     set(value) {
+        //         data.name = value
+        //     }
+        // })
+        Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+        // 创建Vue实例
+        const vm = new Vue({
+            data: {
+                name: "子涵",
+            },
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>

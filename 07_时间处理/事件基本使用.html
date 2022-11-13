@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件基本使用</title>
+</head>
+<!-- 
+    事件的基本使用：
+     1.使用v-on:xxx 或@xxx 绑定事件,xxx为事件名
+     2.事件的回调需要配置在methods对象中,最终会在vm上
+     3.methods中配置函数，慎用箭头函数,注意this指向谁
+     4.methosd中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象
+     5.@click="demo" 和 @click="demo($event)" 效果一样，后者可以传递参数
+ -->
+
+<body>
+    <!-- 容器模板 -->
+    <div id="app">
+        {{name}} <br>
+        <button v-on:click="showInfo1">点我会变帅</button>
+        <button @click="showInfo2($event,28)">点我会更帅点</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+        // new Vue构造函数
+        const vm = new Vue({
+            data: {
+                name: "子涵",
+            },
+            methods: {
+                showInfo1(event) {
+                    // console.log(event) //  这的event 为点击事件所有参数 PointerEvent
+                    // console.log(this) // 此处this指向vm(vue实例)
+                    alert("好像帅一点了")
+                },
+                showInfo2(event, num) {
+                    alert("你是最帅的")
+                    console.log(`实则是${num}少年`)
+                },
+            },
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>
