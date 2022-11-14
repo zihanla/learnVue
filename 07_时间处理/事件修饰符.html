@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+<!-- 
+				Vue中的事件修饰符：
+						1.prevent：阻止默认事件（常用）；
+						2.stop：阻止事件冒泡（常用）；
+						3.once：事件只触发一次（常用）；
+						4.capture：使用事件的捕获模式；
+						5.self：只有event.target是当前操作的元素时才触发事件；
+						6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+		-->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        <h2>晚上好,{{name}}</h2>
+        <!-- prevent 阻止默认事件 -->
+        <a href="https://blog.hxcpl.cn" @click.prevent="showInfo">点我有惊喜哦</a>
+        <!-- stop 阻止冒泡事件(由内往外 button 到 div -->
+        <div style="background-color: red;height:50px" @click="showInfo">
+            <button @click.stop="showInfo">猜猜会发生什么</button>
+        </div>
+        <!-- once 事件只触发一次 -->
+        <button @click.once="showInfo">我能被触发一次</button>
+        <!-- capture 使用事件捕获模式(由外往内) -->
+        <div style="background-color: blue;height:50px" @click.capture="showInfo2('div')">
+            <button @click="showInfo2('button')">猜猜谁先执行</button>
+        </div>
+        <!-- self 只有event.target是当前操作的元素时才触发事件 -->
+        <div style="background-color: yellow;height:50px" @click.self="showInfo">
+            <button @click="showInfo">猜猜会发生什么</button>
+        </div>
+        <!-- passive 事件的默认行为立即执行,无需等待事件回调执行完毕 -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+        // 创建Vue实例
+        const vm = new Vue({
+            data: {
+                name: "子涵",
+            },
+            methods: {
+                showInfo(e) {
+                    alert("啥都没有被骗了吧！")
+                },
+                showInfo2(e) {
+                    console.log(e)
+                },
+                demo() {
+                    for (let i = 0; i < 100000; i++) {
+                        console.log('#')
+                    }
+                    console.log('累坏了')
+                },
+            },
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>
