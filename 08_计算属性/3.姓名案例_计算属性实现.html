@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例_methods实现</title>
+</head>
+
+<!-- 
+    计算属性:
+        1.定义：调用已有属性，计算新的属性
+        2.原理: 底层借助Object.defineproperty方法提供的getter和setter
+        3.get函数什么时候执行?
+            (1).初次读取时执行
+            (2).当需要计算的数据发生改变时会再次被调用
+        4.相较methos实现，内部有缓存机制(复用)，效率高，调试方便     
+ -->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        姓: <input type="text" v-model="xing"><br><br>
+        名: <input type="text" v-model="ming"><br><br>
+        <!-- 假设这里只要xing前三位 -->
+        姓名: {{xingming}}
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        //  创建Vue实例
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                xing: "张",
+                ming: "三",
+            },
+            computed: {
+                xingming: {
+                    get() {
+                        console.log('get被调用了')
+                        return this.xing + '-' + this.ming
+                    },
+                    set(value) {
+                        console.log('set', value)
+                        const arr = value.split('-')
+                        this.xing = arr[0]
+                        this.ming = arr[1]
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

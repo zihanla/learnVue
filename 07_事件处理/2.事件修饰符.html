@@ -41,7 +41,9 @@
         <a href="https://blog.hxcpl.cn" @click.prevent="showInfo">点我有惊喜哦</a>
         <!-- stop 阻止冒泡事件(由内往外 button 到 div -->
         <div style="background-color: red;height:50px" @click="showInfo">
-            <button @click.stop="showInfo">猜猜会发生什么</button>
+            <!-- <button @click.stop="showInfo">猜猜会发生什么</button> -->
+            <!-- 事件修饰符可以连续连写 -->
+            <a href="https://blog.hxcpl.cn" @click.stop.prevent="showInfo">猜猜会发生什么</a>
         </div>
         <!-- once 事件只触发一次 -->
         <button @click.once="showInfo">我能被触发一次</button>
