@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_监视属性简写</title>
+</head>
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        <h2>天气很{{info}} </h2>
+        <button @click="changeWeather">点我切换天气</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // 使用构造函数的方式创建Vue实例
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                isHot: true,
+
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            methods: {
+                changeWeather() {
+                    this.isHot = !this.isHot
+                },
+            },
+            watch: {
+                // 完整写法，可以写配置项
+                // isHot: {
+                //     // immediate: true, // 初始化时让handler被调用
+                //     // deep: true, // 深度监视
+                //     handler(newvalue, oldvalue) {
+                //         console.log("isHost修改了", newvalue, oldvalue)
+                //     },
+                // },
+                // 简写 只用来监视属性
+                //     isHot(newvalue, oldvalue) {
+                //         console.log("isHost修改了", newvalue, oldvalue)
+                //     }
+            },
+        })
+
+        // 在vm上调用watch 
+        // 完整写法
+        // vm.$watch('isHot', {
+        //     // immediate: true, // 初始化时让handler被调用
+        //     // deep: true, // 深度监视
+        //     handler(newvalue, oldvalue) {
+        //         console.log("isHost修改了", newvalue, oldvalue)
+        //     },
+        // })
+
+        // 简写
+        vm.$watch('isHot', function (newvalue, oldvalue) {
+            console.log("isHost修改了", newvalue, oldvalue)
+        })
+    </script>
+</body>
+
+</html>
