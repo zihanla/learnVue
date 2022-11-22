@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例_methods实现</title>
+</head>
+
+<!-- 
+    computed和watch区别：
+        computed能完成的，watch都可以；watch能完成的，computed不一定；例如watch可以进行异步操作
+    原则:
+      1.被Vue管理的函数，最好写成普通函数，此时this指向时Vue实例或组件实例对象
+      2.不被Vue管理的函数(定时器、ajax、Promise的回调函数)，适合写箭头函数，这样this才能指向Vue实例或组件实例对象
+      3.箭头函数中使用this会向上一级找
+ -->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        姓: <input type="text" v-model="xing"><br><br>
+        名: <input type="text" v-model="ming"><br><br>
+        姓名: {{xingming}}
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        //  创建Vue实例
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                xing: "张",
+                ming: "三",
+                xingming: "张-三",
+            },
+            watch: {
+                xing(val) {
+                    // 延迟1s在执行
+                    setTimeout(() => {
+                        this.xingming = val + '-' + this.ming
+                    }, 1000)
+                },
+                ming(val) {
+                    this.xingming = this.xing + '-' + val
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

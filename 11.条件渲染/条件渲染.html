@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+
+<!--
+    条件渲染：
+      v-if
+        适用于：切换频率较低的场景
+        特点：不展示DOM元素直接被移除
+        注意：v-if、v-else-if、v-else可以一起使用，但要求结构不能被打断
+
+    v-show
+       适用于：切换频率较高的场景
+       特点：不展示的DOM元素未被移除，使用样式隐藏(display: none)
+  -->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        <!-- v-show、v-if的使用 都用布尔值做判断 -->
+        <h3>n:{{n}}</h3>
+        <button @click="n++">n+1</button>
+        <h2 v-show="false">看不见我吧</h2>
+        <!-- 来找规律 -->
+        <h2 v-if="false">看不见我吧</h2>
+        <!-- v-else、v-else-if -->
+        <div v-if="n === 1">子涵</div>
+        <div v-else-if="n === 2">涵有闲</div>
+        <div v-else-if="n === 3">小涛</div>
+        <div v-else>闲人</div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false
+        // 创建Vue构造函数
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                n: 0,
+            },
+        })
+    </script>
+</body>
+
+</html>
