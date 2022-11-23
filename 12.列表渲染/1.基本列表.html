@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本列表</title>
+</head>
+
+<!-- 
+    v-for：
+        1.用于展示列表数据
+        2.语法：v-for="(item,index) in xxx" :key="yyy"  yyy唯一标识
+        3.可遍历：常用数组 对象     字符串、指定次数用的少
+ -->
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        <!-- 遍历数组 -->
+        <h2>人员信息</h2>
+        <ul>
+            <!-- <li v-for="(p,index) in persons" :key="p.id"> -->
+            <li v-for="(p,index) in persons" :key="index">
+                {{index}}-{{p.name}}-{{p.age}}
+            </li>
+        </ul>
+
+        <!-- 遍历对象 -->
+        <h2>个人简介</h2>
+        <ul>
+            <li v-for="(val,k) in Han" :key="k">
+                {{k}}-{{val}}
+            </li>
+        </ul>
+
+        <!-- 遍历字符串 -->
+        <h2>消息展示</h2>
+        <ul>
+            <li v-for="(val,k) in msg" :key="k">
+                {{k}}-{{val}}
+            </li>
+        </ul>
+
+        <!-- 遍历指定次数 -->
+        <h2>指定次数</h2>
+        <ul>
+            <li v-for="(num,index) in 5" :key="index">
+                {{index}}-{{num}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // new一个Vue构造函数实例
+        const vm = new Vue({
+            data: {
+                persons: [
+                    { id: '001', name: '张三', age: 18 },
+                    { id: '002', name: '李四', age: 19 },
+                    { id: '003', name: '王五', age: 20 }
+                ],
+                Han: {
+                    name: "子涵",
+                    age: 18,
+                    hobby: "干饭",
+                },
+                msg: "但行好事，莫问前程",
+            },
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>
