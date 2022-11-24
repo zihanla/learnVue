@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表排序</title>
+</head>
+
+
+<body>
+    <!-- 模板容器 -->
+    <div id="app">
+        <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <button @click="sortTyPe = 2">升序</button>
+        <button @click="sortTyPe = 1">降序</button>
+        <button @click="sortTyPe = 0">原顺序</button>
+        <ul>
+            <li v-for="(p,index) in filPerons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            data: {
+                keyWord: '',
+                persons: [
+                    { id: '001', name: '马冬梅', age: 28, sex: '女' },
+                    { id: '002', name: '周冬雨', age: 20, sex: '女' },
+                    { id: '003', name: '周杰伦', age: 39, sex: '男' },
+                    { id: '004', name: '温兆伦', age: 17, sex: '男' }
+                ],
+                sortTyPe: 0, // 定义 升序2 降序 1 原顺序0
+            },
+            computed: {
+                // 计算属性 初始化、使用的值修改时 被调用
+                filPerons() {
+                    const arr = this.persons.filter((p) => {
+                        return p.name.indexOf(this.keyWord) !== -1
+                    })
+                    // 判断是否需要排序 sortType 被修改 如果等于0 不满足条件 直接调用 下面的return arr了
+                    if (this.sortTyPe) {
+                        arr.sort((p1, p2) => { // p1-p2 升序 p2-p1降序
+                            return this.sortTyPe === 1 ? p2.age - p1.age : p1.age - p2.age
+                        })
+                    }
+                    return arr
+                }
+            }
+
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>
